@@ -38,6 +38,11 @@ class Mission
      */
     private $recruiter;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $price;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Mission
     public function setRecruiter(?User $recruiter): self
     {
         $this->recruiter = $recruiter;
+
+        return $this;
+    }
+
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    public function setPrice(string $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }
