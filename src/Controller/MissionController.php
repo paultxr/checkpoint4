@@ -2,19 +2,23 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Mission;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MissionController extends AbstractController
 {
     /**
-     * @Route("/mission", name="mission")
+     * @Route("/missions", name="missions")
      */
     public function index(): Response
     {
+        $missions = $this->getDoctrine()
+        ->getRepository(Mission::class)
+        ->findAll();
         return $this->render('mission/index.html.twig', [
-            'controller_name' => 'MissionController',
+            'missions' => $missions,
         ]);
     }
 }

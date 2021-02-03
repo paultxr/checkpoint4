@@ -1,20 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MissionController!{% endblock %}
+{% block title %}Les candidats{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% include 'navbar2.html.twig'%}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/paultxr/Documents/Projects/Freelance/starterpack-symfony/src/Controller/MissionController.php'|file_link(0) }}">src/Controller/MissionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/paultxr/Documents/Projects/Freelance/starterpack-symfony/templates/mission/index.html.twig'|file_link(0) }}">templates/mission/index.html.twig</a></code></li>
-    </ul>
+<div class="container-fluid missionsFilterContainer">
+	<div class="row missionsRow">
+		<div class="col-md-4 filterContainer">
+		</div>
+		<div class="col-md-8 missionsContainer">
+			<div class="row missionsRow">
+                {% for mission in missions %}
+                    <div class="card missionCard" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ mission.title }}</h5>
+                            <p class="card-text">{{ mission.company }}</p>
+                            <button type="button" class="btn btn-light read-more" data-toggle="modal"
+                            data-target="#modal-{{mission.id}}">En savoir plus</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+		</div>
+	</div>
 </div>
+
+{# MODAL #}
+
+{% for mission in missions %}
+<div class="modal fade" id="modal-{{mission.id}}" tabindex="-1" aria-labelledby="modal-{{mission.id}}"aria-hidden="true">
+    <div class="modal-dialog missionModal" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ mission.title }} - {{mission.company }} </h5>
+        </div>
+        <div class="modal-body">
+          <p>{{ mission.description }}</p></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary read-more">Choisir cette mission </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+</div>
+{% endfor %}
+
+
 {% endblock %}

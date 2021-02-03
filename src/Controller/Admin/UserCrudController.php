@@ -45,6 +45,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('city', 'Ville'),
             AssociationField::new('job', 'Métier'),
             CollectionField::new('techno', 'Techno'),
+            TextField::new('description', 'Description'),
             AssociationField::new('role', 'Role'),
             TextField::new('company', 'Entreprise'),
             ImageField::new('picture', 'Image'),

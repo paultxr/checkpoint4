@@ -1,20 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CandidateController!{% endblock %}
+{% block title %}Les candidats{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% include 'navbar2.html.twig'%}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/paultxr/Documents/Projects/Freelance/starterpack-symfony/src/Controller/CandidateController.php'|file_link(0) }}">src/Controller/CandidateController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/paultxr/Documents/Projects/Freelance/starterpack-symfony/templates/candidate/index.html.twig'|file_link(0) }}">templates/candidate/index.html.twig</a></code></li>
-    </ul>
+<div class="container-fluid candidatesFilterContainer">
+	<div class="row candidatesRow">
+		<div class="col-md-4 filterContainer">
+		</div>
+		<div class="col-md-8 candidatesContainer">
+			<div class="row candidatesRow">
+                {% for candidate in candidates %}
+                {% if candidate.role.id == 1 %}
+                    <div class="card candidateCard" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ candidate.picture }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ candidate.firstname }} {{ candidate.lastname }}</h5>
+                            <p class="card-text">{{ candidate.job }}</p>
+                            <button type="button" class="btn btn-light read-more" data-toggle="modal"
+                            data-target="#modal-{{candidate.id}}">Lire la suite</button>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            
+		</div>
+	</div>
 </div>
+
+{# MODAL #}
+
+{% for candidate in candidates %}
+<div class="modal fade" id="modal-{{candidate.id}}" tabindex="-1" aria-labelledby="modal-{{candidate.id}}"aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div>
+            <img class="card-img-top" src="{{ candidate.picture }}" alt="Card image cap" width="200px">
+        </div>
+        <div class="modal-header">
+            <h5 class="modal-title">{{ candidate.firstname }} {{ candidate.lastname }} {{candidate.job }} </h5>
+        </div>
+        <div class="modal-body">
+          <p>{{ candidate.description }}</p></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary read-more">Travailler avec {{ candidate.firstname }} </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+</div>
+{% endfor %}
+
+
 {% endblock %}
