@@ -73,11 +73,6 @@ class User implements UserInterface
     private $isAvailable;
 
     /**
-     * @ORM\OneToOne(targetEntity=Picture::class, mappedBy="profile", cascade={"persist", "remove"})
-     */
-    private $picture;
-
-    /**
      * @ORM\OneToMany(targetEntity=Mission::class, mappedBy="recruiter", orphanRemoval=true)
      */
     private $missions;
@@ -87,6 +82,11 @@ class User implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $role;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $picture;
 
     public function __construct()
     {
@@ -268,23 +268,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPicture(): ?Picture
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(Picture $picture): self
-    {
-        // set the owning side of the relation if necessary
-        if ($picture->getProfile() !== $this) {
-            $picture->setProfile($this);
-        }
-
-        $this->picture = $picture;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Mission[]
      */
@@ -323,6 +306,18 @@ class User implements UserInterface
     public function setRole(?Role $role): self
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

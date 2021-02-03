@@ -1,0 +1,114 @@
+.contain-login {
+    padding-top: 70px;
+    box-shadow: 15px 30px 80px #00000014;
+    font: normal normal bold 14px/17px Roboto;
+    margin-bottom: 8%;
+}
+.info-login {
+    background-color: blue;
+    border-radius: 10px;
+    height: 720px;
+}
+
+.contain-login-button {
+    padding-top: 20%;
+}
+
+.up-login-button {
+    background-color: white;
+    text-align: center;
+    font: normal normal bold 17px/20px Roboto;
+    letter-spacing: 0px;
+    color: blue;
+    opacity: 1;
+    padding: 10px;
+    margin: 20px;
+    border-left: solid blue;
+}
+
+.down-login-button {
+    background-color: white;
+    text-align: center;
+    font: normal normal bold 17px/20px Roboto;
+    letter-spacing: 0px;
+    color: #D8D8D8;
+    opacity: 1;
+    padding: 10px;
+    margin: 20px;
+    border-left: solid #D8D8D8;
+}
+
+.title-register {
+    font-size: 1em;
+}
+
+.logo-login {
+    margin-top: 240px;
+    display: flex;
+    justify-content: center;
+    width: 80%;
+}
+
+.submit-register {
+    float: right;
+    background-color: grey;
+    width: 197px;
+    height: 54px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 8%;
+    margin-bottom: 15%;
+    color: #fff;
+    font-family: "GhotamBook";
+    font-size: 20px;
+}
+
+.submit-register:hover{
+    background-color:grey;
+}
+
+.login-form {
+        display: grid;
+}
+
+.login-form div, .login-form h1, .login-form label {
+    margin-top: 40px;
+}
+
+.login-form h1 {
+    color: blueviolet;
+    font-family: "GhotamBold";
+    font-size: 23px;
+}
+
+.remember{
+    font-size: 17px;
+}
+
+.mdp-1{
+    margin-bottom: 8%;
+    text-align: center;
+}
+
+.mdp-2{
+    color:grey;
+    font-family:"GhotamBold" ;
+}
+
+.btn-login{
+    background-color: grey;
+    border: none;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 320px;
+    height: 47px;
+    font-size: 19px;
+    font-family: "GhotamBook";
+}
+
+.btn-login:hover{
+    background-color: grey;
+}
