@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Votre candidat
+{% endblock %}
+
+{% block body %}
+{% include 'navbar2.html.twig'%}
+    <div class="container"><div class="bg-light p-3">
+        <h1>Votre candidat</h1>
+    </div>
+
+    {% if items | length > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Image</th>
+                    <th>Métier</th>
+                    <th>Prix</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.candidate.firstname}}</td>
+                        <td>{{ item.candidate.lastname}}</td>
+                        <td><img src="{{ item.candidate.picture}}" height="100px" widht="100px"></td>
+                        <td>{{ item.candidate.job }}</td>
+                        <td>{{ item.candidate.price }}</td>
+                        <td>
+                            <a href="{{ path('cart_remove', {'id': item.candidate.id}) }}" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+        {% for item in items %}
+       <a href="{{ 'success' }}"><button type="submit" id="checkout-button">Envoyer une mission à {{ item.candidate.firstname }}</button></a>
+       {% endfor %}
+    </div>
+
+    {% else %}
+        <p> Vide pour le moment !</p>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+    var stripe = Stripe("pk_live_51I2xgzDEHZhwUvxLmhiGaJdGbkH9kUjl81CdH4x51bRugXJbSDl8HXzuc9u3vN3fG9U3IBxWSf5S5kkpOE6jy3yh00gFs8CuoU");
+    var checkoutButton = document.getElementById("checkout-button");
+    checkoutButton.addEventListener("click", function () {
+      fetch("/create-checkout-session", {
+        method: "POST",
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (session) {
+          return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+          // If redirectToCheckout fails due to a browser or network
+          // error, you should display the localized error message to your
+          // customer using error.message.
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    });
+  </script>
+
+{% endblock %}

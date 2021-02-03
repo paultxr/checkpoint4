@@ -5,6 +5,12 @@
 {% block body %}
 {% include 'navbar2.html.twig'%}
 
+{% for message in app.flashes('notice') %}
+    <div class="flash-notice flashMessage">
+        {{ message }}
+    </div>
+{% endfor %}
+
 <div class="container-fluid candidatesFilterContainer">
 	<div class="row candidatesRow">
 		<div class="col-md-4 filterContainer">
@@ -46,7 +52,7 @@
           <p>{{ candidate.description }}</p></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary read-more">Travailler avec {{ candidate.firstname }} </button>
+            <a href="{{ path('cart_add', { 'id' : candidate.id }) }}"><button type="button" class="btn btn-primary read-more">Travailler avec {{ candidate.firstname }}</button></a>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
         </div>
       </div>
