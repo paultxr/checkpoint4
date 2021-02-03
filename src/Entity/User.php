@@ -100,6 +100,12 @@ class User implements UserInterface
      */
     private $description;
 
+
+    public function __toString()
+    {
+        return $this->firstname;
+    }
+
     public function __construct()
     {
         $this->techno = new ArrayCollection();

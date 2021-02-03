@@ -3,18 +3,41 @@
 {% block title %}Hello ProfileController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/paultxr/Documents/Projects/Freelance/starterpack-symfony/src/Controller/ProfileController.php'|file_link(0) }}">src/Controller/ProfileController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/paultxr/Documents/Projects/Freelance/starterpack-symfony/templates/profile/index.html.twig'|file_link(0) }}">templates/profile/index.html.twig</a></code></li>
-    </ul>
+<div class="bodyProfileContainer">
+    <div class="container containerBlank"></div>
+<div class="container-fluid profileContainer">
+	<div class="row">
+		<div class="col-md-8 profileInfo">
+        <h2 class="">{{ user.firstname }} {{ user.lastname }}</h2>
+        <h5>{{ user.job }} à {{ user.city }}</h5>
+        {% if user.description %}
+        <p>{{user.description}} </p>
+        {% endif %}
+        {% if user.role.name == "Candidat" %}
+        <h5>Compétences & Skills</h5>
+        <div class="skillsContainer">
+            {% for i in range(0, user.techno|length -1) %}
+            <p>{{ user.techno[i].name }} <strong> · </strong></p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if user.price %}
+        <h5>Mes honoraires</h5>
+        <p>{{ user.price}} € de l'heure</p>
+        {% endif %}
+        <a href="{{ "editer" }}"><button class="btn btn-lg btn-primary formSubmit">Éditer mon profil</button></a>
+        {% if user.role.name != "Candidat" %}
+        <a href="{{ 'creation-mission' }}"><button class="btn btn-lg btn-primary formSubmit">Ajouter un nouvelle mission</button></a>
+        <br>
+        <br>
+        <a href="#">Mes missions postées</a>
+        {% endif %}
+		</div>
+		<div class="col-md-4 profilePhoto">
+            <img src="{{ user.picture }}" class="profilePicture">
+		</div>
+	</div>
+</div>
+</div>
 </div>
 {% endblock %}
