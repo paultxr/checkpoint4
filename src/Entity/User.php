@@ -88,6 +88,11 @@ class User implements UserInterface
      */
     private $picture;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $price;
+
     public function __construct()
     {
         $this->techno = new ArrayCollection();
@@ -310,6 +315,7 @@ class User implements UserInterface
         return $this;
     }
 
+<<<<<<< HEAD
     public function getPicture(): ?string
     {
         return $this->picture;
@@ -318,6 +324,16 @@ class User implements UserInterface
     public function setPicture(string $picture): self
     {
         $this->picture = $picture;
+=======
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?string $price): self
+    {
+        $this->price = $price;
+>>>>>>> 3af1326913a76f0d5977d81a3d3be5f517693c09
 
         return $this;
     }
