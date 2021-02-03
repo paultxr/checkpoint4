@@ -4,7 +4,8 @@
 
 {% block body %}
 <div class="loginBody">
-{% include 'navbar2.html.twig'%}
+    <div class="container containerBlank"></div>
+    <div class="container loginForm">
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
@@ -17,9 +18,9 @@
             label: 'Password'
         }) }}
         {{ form_row(registrationForm.isAvailable) }}
-
-        <button type="submit" class="btn">S'inscrire</button>
-    {{ form_end(registrationForm) }}
+        {{ form_end(registrationForm) }}
+        <button type="submit" class="btn formSubmit">S'inscrire</button>
     </div>
+</div>
 </div>
 {% endblock %}

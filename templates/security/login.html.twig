@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="loginBody">
-{% include 'navbar2.html.twig'%}
+    <div class="container containerBlank"></div>
     <div class="container loginForm">
     <form method="post">
         {% if error %}
@@ -17,7 +17,7 @@
             </div>
         {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
         <label for="inputEmail">Email</label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
         <label for="inputPassword">Password</label>
@@ -26,10 +26,10 @@
         <input type="hidden" name="_csrf_token"
             value="{{ csrf_token('authenticate') }}">
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
+        <button class="btn btn-lg btn-primary formSubmit" type="submit">Connexion</button>
     </form>
+    <br>
+    <p>Vous n'avez pas encore de compte ? <a href="{{ 'register' }}">Créez-en un ici !</a></p>
     </div>
 </div>
 {% endblock %}
