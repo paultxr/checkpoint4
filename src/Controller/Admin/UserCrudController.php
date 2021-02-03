@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -43,11 +44,12 @@ class UserCrudController extends AbstractCrudController
             TextField::new('lastname', 'Nom'),
             TextField::new('city', 'Ville'),
             AssociationField::new('job', 'Métier'),
-            AssociationField::new('techno', 'Techno'),
+            CollectionField::new('techno', 'Techno'),
             AssociationField::new('role', 'Role'),
             TextField::new('company', 'Entreprise'),
-            TextField::new('picture', 'Image'),
+            ImageField::new('picture', 'Image'),
             TextField::new('email', 'Email'),
+            TextField::new('price', 'Prix'),
             BooleanField::new('isAvailable', 'Disponible'),
         ];
     }

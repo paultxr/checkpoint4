@@ -315,7 +315,6 @@ class User implements UserInterface
         return $this;
     }
 
-<<<<<<< HEAD
     public function getPicture(): ?string
     {
         return $this->picture;
@@ -324,7 +323,8 @@ class User implements UserInterface
     public function setPicture(string $picture): self
     {
         $this->picture = $picture;
-=======
+    }
+    
     public function getPrice(): ?string
     {
         return $this->price;
@@ -333,7 +333,6 @@ class User implements UserInterface
     public function setPrice(?string $price): self
     {
         $this->price = $price;
->>>>>>> 3af1326913a76f0d5977d81a3d3be5f517693c09
 
         return $this;
     }
