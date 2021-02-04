@@ -85,7 +85,7 @@ class CartController extends AbstractController
             'notice',
             'Le candidat a été contacté avec succès !'
         );
-        $session->clear();
+        $session->remove('cart');
         return $this->redirectToRoute('candidats');
     }
 

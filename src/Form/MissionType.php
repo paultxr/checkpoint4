@@ -17,7 +17,6 @@ class MissionType extends AbstractType
             ->add('isActivated')
             ->add('price')
             ->add('company')
-            ->add('recruiter')
         ;
     }
 

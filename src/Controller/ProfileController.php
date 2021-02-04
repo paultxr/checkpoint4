@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Mission;
 use App\Form\EditProfileType;
+use App\Repository\MissionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,15 +17,23 @@ class ProfileController extends AbstractController
     /**
      * @Route("/profile", name="profile")
      */
-    public function index(Request $request, EntityManagerInterface $manager): Response
+    public function index(Request $request, EntityManagerInterface $manager, MissionRepository $missionRepository): Response
     {
+
         $user = $this->getUser();
+
+        $missions = $this->getDoctrine()
+        ->getRepository(Mission::class)
+        ->findAll();
+
         if (!$user) {
             return $this->redirectToRoute('app_login');
         }
+
         return $this->render('profile/index.html.twig', [
             'controller_name' => 'ProfileController',
             'user' => $user,
+            'missions' => $missions,
         ]);
     }
 

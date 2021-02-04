@@ -12,12 +12,12 @@
         <div>
             <h1>Informations Personnelles</h1>
             {{ form_start(profileForm) }}
+            <button type="submit" class="submit-register">Editer votre profil</button>
                     {{ form_row(profileForm.lastname, {'attr': {'placeholder': "Nom"}, 'label': "Nom"}) }}
                     {{ form_row(profileForm.firstname, {'attr': {'placeholder': "Prénom"}, 'label': "Prénom"}) }}
                     {{ form_row(profileForm.email, {'attr': {'placeholder': "Email"}, 'label': "Email"}) }}
                     {{ form_row(profileForm.city, {'attr': {'placeholder': "Ville"}, 'label': "Ville"})}}
                     {{ form_row(profileForm.job, {'attr': {'placeholder': "Métier"}, 'label': "Code"}) }}
-                    <button type="submit" class="submit-register">Editer votre profil</button>
             {{ form_end(profileForm) }}
 
 
