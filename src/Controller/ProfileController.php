@@ -50,7 +50,8 @@ class ProfileController extends AbstractController
         
         $profileForm = $this->createForm(EditProfileType::class, $user);
         $profileForm->handleRequest($request);
-        if ($profileForm->isSubmitted() && $profileForm->isValid()) {
+        // dd($request);
+        if ($profileForm->isSubmitted()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
