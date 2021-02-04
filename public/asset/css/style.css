@@ -2,9 +2,25 @@ body {
     background-color: white;
 }
 
+/* HOME */
+
+.homeButtons {
+    display: flex;
+    margin-top: 2%;
+    padding-left: 2%;
+}
+
+.banner-text {
+    background-color: darkslategrey;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border-radius: 5px;
+    color: white;
+}
+
 .container-banner{
     position: absolute;
-    height: 1000px;
+    height: 949px;
     background:fixed;
     background-repeat: no-repeat;
     background-size: 100%;

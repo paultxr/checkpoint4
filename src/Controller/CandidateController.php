@@ -18,6 +18,10 @@ class CandidateController extends AbstractController
      */
     public function index(UserRepository $userRepository, Request $request)
     {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('home');
+        }
         $data = new SearchData();
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);

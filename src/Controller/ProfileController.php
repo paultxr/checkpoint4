@@ -21,6 +21,9 @@ class ProfileController extends AbstractController
     {
 
         $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('home');
+        }
 
         $missions = $this->getDoctrine()
         ->getRepository(Mission::class)
@@ -45,12 +48,11 @@ class ProfileController extends AbstractController
     {
         $user = $this->getUser();
         if (!$user) {
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('home');
         }
         
         $profileForm = $this->createForm(EditProfileType::class, $user);
         $profileForm->handleRequest($request);
-        // dd($request);
         if ($profileForm->isSubmitted()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

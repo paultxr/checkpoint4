@@ -8,9 +8,15 @@
     <div class="row">
         <div class="col-md-12 banner">
             <div class="banner-text">
-                <a href="{{ "connexion" }}"><button type="button" class="btn btn-primary">Commencer</button></a>
+               <h1>Un besoin ? Il y a un freelancer pour ça !</h1>
             </div>
         </div>
-    </div>
+        {% if not app.user %}
+       <div class="container homeButtons">
+        <a href="{{ "connexion" }}"><button class="btn btn-lg btn-primary formSubmit">Je me connecte</button></a>
+        <a href="{{ "register" }}"><button class="btn btn-lg btn-primary formSubmit">Je crée mon compte</button></a>
+       </div>   
+       {% endif %}
+</div>
 </div>
 {% endblock %}

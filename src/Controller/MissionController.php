@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Mission;
 use App\Form\MissionType;
+use App\Form\EditMissionType;
 use App\Repository\UserRepository;
 use App\Repository\MissionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,6 +21,10 @@ class MissionController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $manager): Response
     {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('home');
+        }
         $missions = $this->getDoctrine()
         ->getRepository(Mission::class)
         ->findAll();
@@ -53,23 +58,25 @@ class MissionController extends AbstractController
             'mission' => $mission,
             'missionForm' => $missionForm->createView(),
         ]);
+
     }
 
-    /**
+     /**
      * @Route("/editer-mission", name="editer-mission")
      */
     public function editMission( Request $request,EntityManagerInterface $manager): Response 
     {
         $user = $this->getUser();
         if (!$user) {
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('home');
         }
 
-        // $mission = $this->getMission();
+        $mission = new Mission();
+        $mission->setRecruiter($user);
         
-        $missionForm = $this->createForm(MissionType::class);
-        $missionForm->handleRequest($request);
-        if ($missionForm->isSubmitted() &&  $missionForm->isValid()) {
+        $editMissionType = $this->createForm(EditMissionType::class, $mission);
+        $editMissionType->handleRequest($request);
+        if ($editMissionType->isSubmitted()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($mission);
             $entityManager->flush();
@@ -77,7 +84,8 @@ class MissionController extends AbstractController
 
         return $this->render('mission/edit.html.twig', [
             'controller_name' => 'MissionController',
-            'missionForm' => $missionForm->createView(),
+            'editMissionType' => $editMissionType->createView(),
+            'mission' => $mission,
         ]);
     }
 }

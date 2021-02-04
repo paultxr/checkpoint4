@@ -18,6 +18,10 @@ class CartController extends AbstractController
      */
     public function index(SessionInterface $session, UserRepository $candidateRepository)
     {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('home');
+        }
 
         $cart = $session->get('cart', []);
 
