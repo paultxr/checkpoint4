@@ -14,18 +14,25 @@
 <div class="container-fluid candidatesFilterContainer">
 	<div class="row candidatesRow">
 		<div class="col-md-4 filterContainer">
+            {{form_start(form)}}
+            <h5>Rechercher</h5>
+            {{form_row(form.q)}}
+            <h5>Métiers</h5>
+            {{form_row(form.job)}}
+            <button type="submit">Filtrer</button>
+            {{form_end(form)}}
 		</div>
 		<div class="col-md-8 candidatesContainer">
 			<div class="row candidatesRow">
-                {% for candidate in candidates %}
-                {% if candidate.role.id == 1 %}
+                {% for user in users %}
+                {% if user.role.id == 1 %}
                     <div class="card candidateCard" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ candidate.picture }}" alt="Card image cap">
+                        <img class="card-img-top" src="{{ user.picture }}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">{{ candidate.firstname }} {{ candidate.lastname }}</h5>
-                            <p class="card-text">{{ candidate.job }}</p>
+                            <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
+                            <p class="card-text">{{ user.job }}</p>
                             <button type="button" class="btn btn-light read-more" data-toggle="modal"
-                            data-target="#modal-{{candidate.id}}">Lire la suite</button>
+                            data-target="#modal-{{user.id}}">Lire la suite</button>
                         </div>
                     </div>
                     {% endif %}
@@ -38,21 +45,21 @@
 
 {# MODAL #}
 
-{% for candidate in candidates %}
-<div class="modal fade" id="modal-{{candidate.id}}" tabindex="-1" aria-labelledby="modal-{{candidate.id}}"aria-hidden="true">
+{% for user in users %}
+<div class="modal fade" id="modal-{{user.id}}" tabindex="-1" aria-labelledby="modal-{{user.id}}"aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div>
-            <img class="card-img-top" src="{{ candidate.picture }}" alt="Card image cap" width="200px">
+            <img class="card-img-top" src="{{ user.picture }}" alt="Card image cap" width="200px">
         </div>
         <div class="modal-header">
-            <h5 class="modal-title">{{ candidate.firstname }} {{ candidate.lastname }} {{candidate.job }} </h5>
+            <h5 class="modal-title">{{ user.firstname }} {{ user.lastname }} {{user.job }} </h5>
         </div>
         <div class="modal-body">
-          <p>{{ candidate.description }}</p></p>
+          <p>{{ user.description }}</p></p>
         </div>
         <div class="modal-footer">
-            <a href="{{ path('cart_add', { 'id' : candidate.id }) }}"><button type="button" class="btn btn-primary read-more">Travailler avec {{ candidate.firstname }}</button></a>
+            <a href="{{ path('cart_add', { 'id' : user.id }) }}"><button type="button" class="btn btn-primary read-more">Travailler avec {{ user.firstname }}</button></a>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
         </div>
       </div>

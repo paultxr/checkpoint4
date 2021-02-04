@@ -3,11 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Data\SearchData;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -36,32 +37,30 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    /**
+     * Récupère les candidats en lien avec une recherche
+     * @return User[]
+     */
 
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+     public function findSearch(SearchData $search): array 
+     {
+        $query = $this
+            ->createQueryBuilder('p')
+            ->join('p.job', 'j');
+
+        if (!empty($search->q)) {
+            $query = $query
+                ->andWhere('p.firstname LIKE :q')
+                ->setParameter('q', "%{$search->q}%");
+            }
+        
+        if (!empty($search->job)) {
+            $query = $query
+                ->andWhere('j.id IN (:job)')
+                ->setParameter('job', $search->job);
+        }
+
+        return $query->getQuery()->getResult();
+     }
+
 }
