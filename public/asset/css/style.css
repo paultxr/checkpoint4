@@ -146,12 +146,22 @@ body {
     height: 200px;
 }
 
-.formSubmit {
+.formSubmit1 {
     margin-top : 1%;
     background-color: lightblue;
     border: none;
     color: white;
+    margin-right: 2%;
 }
+
+.formSubmit2 {
+    margin-top : 1%;
+    background-color: lightblue;
+    border: none;
+    color: white;
+    margin-left: 2%;
+}
+
 
 
 /* PROFILE */
