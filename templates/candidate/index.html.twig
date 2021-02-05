@@ -41,12 +41,16 @@
                             data-target="#modal-{{user.id}}">Lire la suite</button>
                         </div>
                     </div>
+
                     {% endif %}
                 {% endfor %}
             </div>
-            
 		</div>
-	</div>
+
+        <div class='pagination'>
+            {{ knp_pagination_render(users) }}
+          </div>
+        
 </div>
 
 {# MODAL #}
@@ -65,8 +69,10 @@
           <p>{{ user.description }}</p></p>
         </div>
         <div class="modal-footer">
+            {% if app.user.role.id == 2 %}
             <a href="{{ path('cart_add', { 'id' : user.id }) }}"><button type="button" class="btn btn-primary read-more">Travailler avec {{ user.firstname }}</button></a>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            {% endif %}
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
         </div>
       </div>
     </div>

@@ -7,6 +7,12 @@ use App\Entity\Techno;
 
 class SearchData 
 {
+
+    /**
+     * @var int
+     */
+    public $page = 1;
+    
     /**
      * @var string
      */

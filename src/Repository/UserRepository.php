@@ -4,7 +4,10 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Data\SearchData;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -18,9 +21,10 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, User::class);
+        $this->paginator = $paginator;
     }
 
     /**
@@ -38,11 +42,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
+     * Récupère les produits en lien avec une recherche
+     */
+    public function findSearch(SearchData $search): PaginationInterface
+    {
+        $query = $this->getSearchQuery($search)->getQuery();
+        return $this->paginator->paginate(
+            $query,
+            $search->page,
+            8
+        );
+    }
+
+    /**
      * Récupère les candidats en lien avec une recherche
      * @return User[]
      */
 
-     public function findSearch(SearchData $search): array 
+    private function getSearchQuery(SearchData $search): QueryBuilder
      {
         $query = $this
             ->createQueryBuilder('p')
@@ -67,7 +84,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 ->setParameter('techno', $search->techno);
         }
 
-        return $query->getQuery()->getResult();
+        return $query;
      }
 
 }

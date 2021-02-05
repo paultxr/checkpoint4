@@ -75,7 +75,10 @@ body {
     border: none;
 }
 
-
+.pagination {
+    margin-top: 2%;
+    margin-left: 40%;
+}
 
 /* MISSION CARDS */
 
@@ -187,4 +190,21 @@ body {
 
 .userMissionContainer {
     display: flex;
+}
+
+/* MISSION */ 
+
+.missionFilterContainer {
+    background-color: rgb(154, 206, 154);
+    border-radius: 5px;
+    height: 700px;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 400px;
+}
+
+.missionReadMore {
+    background-color:  rgb(154, 206, 154);
+    color: black;
+    border: none;
 }

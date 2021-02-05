@@ -6,7 +6,7 @@
 
 <div class="container-fluid missionsFilterContainer">
 	<div class="row missionsRow">
-		<div class="col-md-4 filterContainer">
+		<div class="col-md-4 missionFilterContainer">
 		</div>
 		<div class="col-md-8 missionsContainer">
 			<div class="row missionsRow">
@@ -16,7 +16,7 @@
                             <h5 class="card-title">{{ mission.title }}</h5>
                             <p class="card-text">{{ mission.company }}</p>
                             <p class="card-text">{{ mission.recruiter }}</p>
-                            <button type="button" class="btn btn-light read-more" data-toggle="modal"
+                            <button type="button" class="btn btn-light missionReadMore" data-toggle="modal"
                             data-target="#modal-{{mission.id}}">En savoir plus</button>
                         </div>
                     </div>
@@ -40,7 +40,9 @@
           <p>{{ mission.description }}</p></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary read-more">Choisir cette mission </button>
+          {% if app.user.role.id == 1 %}
+          <button type="button" class="btn btn-primary missionReadMore">Choisir cette mission </button>
+          {% endif %}
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
         </div>
       </div>
