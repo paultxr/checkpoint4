@@ -46,7 +46,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      {
         $query = $this
             ->createQueryBuilder('p')
-            ->join('p.job', 'j');
+            ->join('p.job', 'j')
+            ->join('p.techno', 't');;
 
         if (!empty($search->q)) {
             $query = $query
@@ -58,6 +59,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $query = $query
                 ->andWhere('j.id IN (:job)')
                 ->setParameter('job', $search->job);
+        }
+
+        if (!empty($search->techno)) {
+            $query = $query
+                ->andWhere('t.id IN (:techno)')
+                ->setParameter('techno', $search->techno);
         }
 
         return $query->getQuery()->getResult();

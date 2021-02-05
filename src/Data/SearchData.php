@@ -17,4 +17,9 @@ class SearchData
      */
     public $job = [];
 
+    /**
+     * @var Techno[]
+     */
+    public $techno = [];
+
 }

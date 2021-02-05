@@ -44,6 +44,14 @@ class SearchForm extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
             ])
+
+            ->add('techno', EntityType::class, [
+                'label' => false,
+                'required' => false,
+                'class' => Techno::class,
+                'expanded' => true,
+                'multiple' => true,
+            ])
         ;
     }
 }

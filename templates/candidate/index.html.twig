@@ -14,11 +14,17 @@
 <div class="container-fluid candidatesFilterContainer">
 	<div class="row candidatesRow">
 		<div class="col-md-4 filterContainer">
+            <br>
             {{form_start(form)}}
-            <h5>Rechercher</h5>
+            <h5>Rechercher par nom</h5>
             {{form_row(form.q)}}
+            <br>
             <h5>Métiers</h5>
             {{form_row(form.job)}}
+            <br>
+            <h5>Technos</h5>
+            {{form_row(form.techno)}}
+            <br>
             <button type="submit">Filtrer</button>
             {{form_end(form)}}
 		</div>
