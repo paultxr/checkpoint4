@@ -2,6 +2,7 @@ body {
     background-color: white;
 }
 
+
 /* HOME */
 
 .homeButtons {
@@ -77,13 +78,15 @@ body {
 
 .pagination {
     margin-top: 2%;
-    margin-left: 40%;
+   padding-left: 40%;
+    margin-bottom: 5%;
 }
 
 /* MISSION CARDS */
 
 .missionsFilterContainer {
     margin-top: 4%;
+    margin-bottom: 5%;
 }
 
 
@@ -207,4 +210,23 @@ body {
     background-color:  rgb(154, 206, 154);
     color: black;
     border: none;
+}
+
+.missionText {
+    margin-top: 5%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.missionCompanies {
+    display: grid;
+    grid-template-columns: repeat(3, 0.5fr);
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-left: 5%;
+}
+
+.companiesLogo {
+    margin-bottom: 15%;
+    border-radius: 5px;
 }
