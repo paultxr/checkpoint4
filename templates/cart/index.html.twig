@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Votre candidat
+{% endblock %}
+
+{% block body %}
+
+    <div class="container"><div class="bg-light p-3">
+        <h1>Votre candidat</h1>
+    </div>
+
+    {% if items | length > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Image</th>
+                    <th>Métier</th>
+                    <th>Prix</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.candidate.firstname}}</td>
+                        <td>{{ item.candidate.lastname}}</td>
+                        <td><img src="{{ item.candidate.picture}}" height="100px" widht="100px"></td>
+                        <td>{{ item.candidate.job }}</td>
+                        <td>{{ item.candidate.price }}</td>
+                        <td>
+                            <a href="{{ path('cart_remove', {'id': item.candidate.id}) }}" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+        {% for item in items %}
+       <a href="{{ 'success' }}"><button type="submit" id="checkout-button">Envoyer une mission à {{ item.candidate.firstname }}</button></a>
+       {% endfor %}
+    </div>
+
+    {% else %}
+        <p> Vide pour le moment !</p>
+    {% endif %}
+
+
+{% endblock %}

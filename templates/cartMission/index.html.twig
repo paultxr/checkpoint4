@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Votre mission
+{% endblock %}
+
+{% block body %}
+
+    <div class="container"><div class="bg-light p-3">
+        <h1>Votre mission</h1>
+    </div>
+
+    {% if items | length > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Image</th>
+                    <th>Métier</th>
+                    <th>Prix</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.mission.title}}</td>
+                        <td>{{ item.mission.company}}</td>
+                        <td>{{ item.mission.price }}</td>
+                        <td>
+                            <a href="{{ path('cart_remove', {'id': item.mission.id}) }}" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+        {% for item in items %}
+       <a href="{{ 'successmission' }}"><button type="submit" id="checkout-button">Sélectionner cette mission</button></a>
+       {% endfor %}
+    </div>
+
+    {% else %}
+        <p> Vide pour le moment !</p>
+    {% endif %}
+
+
+{% endblock %}

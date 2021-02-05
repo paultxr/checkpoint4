@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une nouvelle mission{% endblock %}
+
+{% block body %}
+<div class="bodyProfileContainer">
+    <div class="container containerBlank"></div>
+<div class="container-fluid profileContainer">
+	<div class="row">
+		<div class="col-md-12 profileInfo">
+
+			{{ form_start(editMissionType) }}
+			<button type="submit" class="submit-register">Ajouter une nouvelle mission</button>
+			{{ form_end(editMissionType) }}
+		</div>
+        
+</div>
+</div>
+{% include 'footer.html.twig'%}
+{% endblock %}

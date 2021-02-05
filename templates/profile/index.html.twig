@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+<div class="bodyProfileContainer">
+    <div class="container containerBlank"></div>
+<div class="container-fluid profileContainer">
+	<div class="row">
+		<div class="col-md-8 profileInfo">
+        <h2 class="">{{ user.firstname }} {{ user.lastname }}</h2>
+        <h5>{{ user.job }} à {{ user.city }}</h5>
+        {% if user.description %}
+        <p>{{user.description}} </p>
+        {% endif %}
+        {% if user.role.name == "Candidat" %}
+        <h5>Compétences & Skills</h5>
+        <div class="skillsContainer">
+            {% for i in range(0, user.techno|length -1) %}
+            <p>{{ user.techno[i].name }} <strong> · </strong></p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if user.price %}
+        <h5>Mes honoraires</h5>
+        <p>{{ user.price}} € de l'heure</p>
+        {% endif %}
+        <a href="{{ "editer" }}"><button class="btn btn-lg btn-primary formSubmit">Éditer mon profil</button></a>
+        {% if user.role.name != "Candidat" %}
+        <a href="{{ 'creation-mission' }}"><button class="btn btn-lg btn-primary formSubmit">Ajouter un nouvelle mission</button></a>
+        <br>
+        <br>
+        <h5>Mes missions postées</h5>
+        <div class="container userMissionContainer">
+            {% for mission in user.missions %}
+                    <div class="card missionCard" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ mission.title }}</h5>
+                            <p class="card-text">{{ mission.company }}</p>
+                            <a href="{{ "editer-mission" }}"><button class="btn btn-lg btn-primary formSubmit">Éditer ma mission</button></a>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+		</div>
+		<div class="col-md-4 profilePhoto">
+            <img src="{{ user.picture }}" class="profilePicture">
+		</div>
+	</div>
+</div>
+</div>
+</div>
+{% include 'footer.html.twig'%}
+{% endblock %}

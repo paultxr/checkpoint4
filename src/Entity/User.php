@@ -6,11 +6,13 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
@@ -73,20 +75,36 @@ class User implements UserInterface
     private $isAvailable;
 
     /**
-     * @ORM\OneToOne(targetEntity=Picture::class, mappedBy="profile", cascade={"persist", "remove"})
-     */
-    private $picture;
-
-    /**
      * @ORM\OneToMany(targetEntity=Mission::class, mappedBy="recruiter", orphanRemoval=true)
      */
     private $missions;
 
     /**
      * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="person")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $role;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $picture;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+
+    public function __toString()
+    {
+        return $this->firstname;
+    }
 
     public function __construct()
     {
@@ -268,23 +286,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPicture(): ?Picture
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(Picture $picture): self
-    {
-        // set the owning side of the relation if necessary
-        if ($picture->getProfile() !== $this) {
-            $picture->setProfile($this);
-        }
-
-        $this->picture = $picture;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Mission[]
      */
@@ -323,6 +324,43 @@ class User implements UserInterface
     public function setRole(?Role $role): self
     {
         $this->role = $role;
+
+        return $this;
+    }
+    
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+    
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?string $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

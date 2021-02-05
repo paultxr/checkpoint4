@@ -29,6 +29,11 @@ class Role
      */
     private $person;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->person = new ArrayCollection();

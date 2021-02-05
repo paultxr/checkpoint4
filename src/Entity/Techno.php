@@ -29,6 +29,11 @@ class Techno
      */
     private $users;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->users = new ArrayCollection();

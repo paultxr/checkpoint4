@@ -1,20 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MissionController!{% endblock %}
+{% block title %}Les candidats{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% for message in app.flashes('notice') %}
+    <div class="flash-notice flashMessage">
+        {{ message }}
+    </div>
+{% endfor %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/paultxr/Documents/Projects/Freelance/starterpack-symfony/src/Controller/MissionController.php'|file_link(0) }}">src/Controller/MissionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/paultxr/Documents/Projects/Freelance/starterpack-symfony/templates/mission/index.html.twig'|file_link(0) }}">templates/mission/index.html.twig</a></code></li>
-    </ul>
+<div class="container-fluid missionsFilterContainer">
+	<div class="row missionsRow">
+		<div class="col-md-4 missionFilterContainer">
+      <div class='missionText'>
+      <h5>Les missions</h5>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla enim, suscipit vel sem at, vestibulum blandit risus. Nam non mattis purus. Nam a mattis massa. Morbi in ornare diam, eu dapibus mi. Aliquam erat volutpat. Cras imperdiet tristique diam ut gravida. Nulla ac fermentum nisi. Proin mattis, ligula pulvinar facilisis rutrum, ex quam aliquet nibh, eget venenatis elit nisl dignissim diam. Vestibulum ultrices ullamcorper tincidunt.</p>
+      </div>
+      <h5>Les entreprises</h5>
+      <div class="missionCompanies">
+      <img class="companiesLogo" src="https://resources.mynewsdesk.com/image/upload/fl_attachment/wkilfq6fu8conjov0r6p" width="70px" height="70px">
+      <img class="companiesLogo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQoAAAC+CAMAAAD6ObEsAAAAhFBMVEXfER/////dAADgICz419j/+/vfCBriND798fLeABLeAATvnJ/oaG753d7tmZv3ztDwp6rzu73jPUXytbfeABPlVFv31NXvoaT86uvsi4/yr7LqfoLeAAzocHX75eb2yszmXWPskZTmW2HnZWr1xMbkTlXpd3vhJzPiMzvrhIjkRk7gFySGJsxwAAAES0lEQVR4nO2da3eiMBCGYSysYrVVqbgWL1Tttvb//7/1Bqc1ySBdtgdm3ufzkITncAnJJHgdcMEDAAAAAAAAAAAAAAAAAADQSBpRdXqhUU74nXKcRLHnxSmH2YJ/haZ+UIlud7BNFh2i+Es58VPFcnj8CdHI53ik2lXcsRU6mc13lH5VUSstUnFgllEEFReCrLhNtKs4XBk7goqchEKouDA9uYCKIzMvhIoLs0OPCyrOLAkqclYEFTkZQUXOeFdPOTktVrEc11NOTotV+POayrnQZhU1AxUFUFEAFQVQUQAVBVBR0EAV3SyZjx5mNZ7kbTRRxWVi4in5WR2NVHGOi4nWgxpPtYxRc1WcbPwuO4FkaJCVXE2WQw70F3GTVRyCy77EXym6hkqupT/mIUdir9kqPLrnoydm+8pU/HJNfjZcRVn7BopUhCEfrkiFRxM2/MM4MbkqSoZz94pUeBRw4evYqECwiikXft/TpIIdxFxoUhFlXPirJhXpMxeu6qroLbhwVY/NHtv3foKKnDezX1FSQYtVpK9cuKXjLVhFViVatAp6ZKLvdKlYMdFzXSq4AbrntHIF7VURdrho8wUiWEX6XiFYtgo23jK0KVdFvOeCzU90wSrY8MDWOqkq+Ekh2/0hVQVt2FhzYFOqipDYoQpbV1Omipg6XD/zwMb4QJemIo57KRFttnygbWZMmIrdy3qRzW/IzdlZLwpBKm5m5GiaPhWBZUGyUhUb85tUqQp3w7SpeHC3S5kKe+dKo4rzSlOoOH6FcXtJKFIRLPg26VExj11vUVUquqNnYm8ORSpm23IXOlScmH/gWVHwG2+QgjvP/n1+roBNY5Omwg/G7teIMhW+v3O6UKfCH1tmg5SqCMzsbq0qXKO8glRM9h9E8fi+X3JGzrbJUTE8dRrCXkTekE109/29fR5EjIp+sU1eSHx6t+MWkajiGMxm8lqymuWqKJk/nlln0oWq8KjPBdtmTcWq4BP0VrYEJLEq+DUQniVDT6wKj7jod0vepmAVD0z01pLNK1hFwkRbEtMEq2BzWG3rQeSq4JfGWBZXalUxvA7Xq8JcBaFWhfkKUavC7G+qVWHmnEAFVEAFVEAFVEAFVEAFVPxHFdyoF1RABVRARV4BHptQARVQARWVVOANAhU/piKh0IU2FfO3sYuOMhUM1vQ4nSpsuw9BBVRAxQWoKICKAqgogIqCZqhYalIRs8n/5o6bklW8sPFmsqJcFSH/Z9/x9ZkJVsHnu5sJ76JVsP9UM1L0RKvgf6xUaaWA324V/NvUuEMkqyj5sZKxxbNoFdyKkMNlcbXwTrKKsMceEaRfTk60Ci9iV8dc7bwpWwX/NwjfX39+cgpX4dGSOyb4vMayRSpWXY4gs+7cEqZT7qjPq0Joy1fgVBEly8G3WL4wuxCxLngce9iEtx9UUoF7LisqOdLJN00AAAAAAAAAAAAAAAAAAKCF/AUKcq0KxtNBGwAAAABJRU5ErkJggg==" width="70px" height="70px">
+      <img class="companiesLogo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Orange_logo.svg/1022px-Orange_logo.svg.png" width="70px" height="70px">
+      <img class="companiesLogo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADgCAMAAADCMfHtAAAANlBMVEXiADAZFxz////63OEAAAfj4uPhACEAFhoAAADiAC/2v8nDw8PhABgNChHgACjhAB7yp7OxsbLPSY4DAAABCUlEQVR4nO3SSWoEMRQFwWpPPU/3v6y9tjfVICiliTiAePnRsgAAAAAAAAAAAAAAAAAAAAAAAAAAAACwteNx6wW/jN8zWeHgi/+8dvuazW1o4nJ/vM/mcR8ZeLyc3mZzuoz8qAq3oPBFUxaODEwX7lc5nLcO+uN8WDd92a0yZeG66QoVbkfhq4XPz9k8xxburh+zua5cvrawS2Gfwj6FfQr7FPYp7FPYp7BPYZ/CPoV9CvsU9insU9insE9hn8I+hX0K+xT2KexT2KewT2Gfwj6FfQr7FPYp7FPYp7BPYZ/CPoV9CvsU9insU9insE9hn8I+hX0K+xT2KexT2KewT2Gfwj6Fff+/8BsUkXp2V+9IKwAAAABJRU5ErkJggg==" width="70px" height="70px">
+      <img class="companiesLogo" src="https://lh3.googleusercontent.com/proxy/saLqb3WjgZIYy0LwXB9hOdrqtidx79NwGYT1f0XCdRE3C6S3NLkSXAq6gfnUT40hiyNaK7SGZ5oJUXq453XaUrQb6gI7ouCtDdCOKoE5oAGoy0GdWkSn0JTf4E4yp1v90IRCi0cLEBQAL7_vIw" width="70px" height="70px">
+      <img class="companiesLogo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCvrEzz1dciE-8AV2FJA2PwnFn9imUlg7ONA&usqp=CAU" width="70px" height="70px">
+      </div>
+
+		</div>
+		<div class="col-md-8 missionsContainer">
+			<div class="row missionsRow">
+                {% for mission in missions %}
+                    <div class="card missionCard" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ mission.title }}</h5>
+                            <p class="card-text">{{ mission.company }}</p>
+                            <p class="card-text">{{ mission.recruiter }}</p>
+                            <button type="button" class="btn btn-light missionReadMore" data-toggle="modal"
+                            data-target="#modal-{{mission.id}}">En savoir plus</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+		</div>
+	</div>
 </div>
+
+{# MODAL #}
+
+{% for mission in missions %}
+<div class="modal fade" id="modal-{{mission.id}}" tabindex="-1" aria-labelledby="modal-{{mission.id}}"aria-hidden="true">
+    <div class="modal-dialog missionModal" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ mission.title }} - {{mission.company }} </h5>
+        </div>
+        <div class="modal-body">
+          <p>{{ mission.description }}</p></p>
+        </div>
+        <div class="modal-footer">
+          {% if app.user.role.id == 1 %}
+          <a href="{{ path('cartmission_add', { 'id' : mission.id }) }}"><button type="button" class="btn btn-primary missionReadMore">Choisir cette mission </button></a>
+          {% endif %}
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+</div>
+{% endfor %}
+
+{% include 'footer.html.twig'%}
 {% endblock %}
